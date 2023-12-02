@@ -51,11 +51,12 @@ tail(student_mat)
 ```
 The initial rows of the dataset are displayed, providing a preview of the data.
 ## Insights Gained during this phase 
-**Dataset Description:** The dataset comprises 395 entries and 33 columns, providing comprehensive information about individual students across diverse parameters.
-**Shape of the Dataset:** The data includes details on various aspects of 395 students, with each student described by 33 different attributes.
-**Column Names:** The columns cover a wide range of information, encompassing school details, gender, age, address, family size, parental education, and academic performance.
-**Summary of Numeric Columns:** A thorough summary of numeric attributes is provided, offering insights into age, absences, and grades (G1, G2, G3). This summary encompasses key statistics like minimum, maximum, median, mean, and quartiles.
-**Insights from Numeric Columns:**
+
+- **Dataset Description:** The dataset comprises 395 entries and 33 columns, providing comprehensive information about individual students across diverse parameters.
+- **Shape of the Dataset:** The data includes details on various aspects of 395 students, with each student described by 33 different attributes.
+- **Column Names:** The columns cover a wide range of information, encompassing school details, gender, age, address, family size, parental education, and academic performance.
+- **Summary of Numeric Columns:** A thorough summary of numeric attributes is provided, offering insights into age, absences, and grades (G1, G2, G3). This summary encompasses key statistics like minimum, maximum, median, mean, and quartiles.
+- **Insights from Numeric Columns:**
 - Age: The age of students ranges from 15 to 22, with an average (mean) age of approximately 16.7.
 - Absences: The number of absences varies from 0 to 75, with an average of about 5.709.
 - Grades (G1, G2, G3): Grades show a spread from 3 to 19, with mean values around 10.91, 10.71, and 10.42, respectively.
