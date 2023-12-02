@@ -1,0 +1,1281 @@
+---
+title: "STA 2040 END SEMESTER EXAMINATIONS"
+author: "Ivy Kemunto"
+date: "2023-06-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# TASK 1: Load and Understand the Data
+## - Use the proper library to load the dataset into RStudio
+```{r}
+library(readr)
+student_mat <- read_csv("C:/Users/ADMIN/Desktop/End-semesters STA 2040/student-mat.csv")
+View(student_mat)
+```
+-Here I loaded and viewed the data set to get the initial and basic understanding of its structure and contents.
+-I noted that the data set has 395 entries and 33 total columns
+
+## - To gain a general sense of the dataset, display summary statistics.
+```{r}
+# GENERATING THE DATASET DESCRIPTIONS AND SUMMARY STATISTICS
+# Getting the shape of the dataset
+shape=dim(student_mat)
+shape
+# Get the column names of the dataset
+column_names=colnames(student_mat)
+print(column_names)
+
+# Summary of numeric columns
+summary(student_mat[c("age", "absences", "G1", "G2", "G3","Medu", "Fedu", "traveltime", "studytime", "failures", "famrel","freetime", "goout", "Dalc", "Walc", "health")])
+
+# Generate the structure of the dataset
+str(student_mat)
+# Previewing the first few rows of the dataset 
+head(student_mat)
+# Previewing the last few rows of the dataset 
+tail(student_mat)
+# Check the class of the dataset
+class(student_mat)
+# Get the attributes of the data frame
+attributes(student_mat)
+```
+**Shape of the Data set:**
+
+The shape variable stores the dimensions of the dataset. It indicates that the dataset contains 395 rows and 33 columns. This means there are data entries for 395 students, each described by 33 attributes.
+
+**Column Names:**
+
+The column_names variable holds the names of all 33 columns in the data set. These column names correspond to different characteristics and information about the students: The columns are as follows( I got the meaning of the columns after some research on Kaggle):
+
+1. **school (Character):** This column indicates the school the student attends. It is of character data type, which means it holds textual values representing the school's names.
+
+2. **sex (Character):** The "sex" column represents the gender of the student. It is of character data type, containing values like "F" (female) and "M" (male).
+
+3. **age (Numeric):** The "age" column contains the age of each student. It is of numeric data type, representing numerical values.
+
+4. **address (Character):** The "address" column indicates the type of address where the student lives (urban or rural). It is of character data type.
+
+5. **famsize (Character):** This column describes the family size of the student (greater than 3 or less than or equal to 3). It is of character data type.
+
+6. **Pstatus (Character):** The "Pstatus" column represents the cohabitation status of the parents (together or apart). It is of character data type.
+
+7. **Medu (Numeric):** The "Medu" column contains the education level of the mother. It is of numeric data type, representing educational levels.
+
+8. **Fedu (Numeric):** The "Fedu" column represents the education level of the father. It is of numeric data type, indicating educational levels.
+
+9. **Mjob (Character):** This column holds the occupation of the mother. It is of character data type, storing various job types.
+
+10. **Fjob (Character):** The "Fjob" column describes the occupation of the father. It is of character data type, containing different job types.
+
+11. **reason (Character):** This column provides the reason for choosing the school. It is of character data type, indicating various reasons.
+
+12. **guardian (Character):** The "guardian" column represents the guardian of the student. It is of character data type, holding guardian names.
+
+13. **traveltime (Numeric):** This column shows the time it takes to travel to school. It is of numeric data type, representing travel time values.
+
+14. **studytime (Numeric):** The "studytime" column indicates the weekly study time in hours. It is of numeric data type, containing numerical values.
+
+15. **failures (Numeric):** This column represents the number of past class failures. It is of numeric data type, holding count values.
+
+16. **schoolsup (Character):** The "schoolsup" column indicates whether the student receives extra educational support from the school. It is of character data type.
+
+17. **famsup (Character):** This column represents whether the student receives family educational support. It is of character data type.
+
+18. **paid (Character):** The "paid" column indicates whether the student takes extra paid classes. It is of character data type.
+
+19. **activities (Character):** This column describes whether the student participates in extracurricular activities. It is of character data type.
+
+20. **nursery (Character):**
+The "nursery" column indicates whether the student attended a nursery school. It is of character data type.
+
+21. **higher (Character):** This column represents whether the student aspires to pursue higher education. It is of character data type.
+
+22. **internet (Character):** The "internet" column indicates whether the student has internet access. It is of character data type.
+
+23. **romantic (Character):** This column indicates whether the student is in a romantic relationship. It is of character data type.
+
+24. **famrel (Numeric):** The "famrel" column represents the quality of family relationships. It is of numeric data type, containing values representing relationship quality.
+
+25. **freetime (Numeric):** This column describes the amount of free time after school. It is of numeric data type, holding numerical values.
+
+26. **goout (Numeric):** The "goout" column indicates how often the student goes out with friends. It is of numeric data type, containing numerical values.
+
+27. **Dalc (Numeric):**
+This column represents the weekday alcohol consumption. It is of numeric data type, containing alcohol consumption levels.
+
+28. **Walc (Numeric):** The "Walc" column represents the weekend alcohol consumption. It is of numeric data type, indicating alcohol consumption levels.
+
+29. **health (Numeric):**
+This column indicates the student's self-reported health status. It is of numeric data type, containing health status values.
+
+30. **absences (Numeric):** The "absences" column represents the number of absences from school. It is of numeric data type, holding count values.
+
+31. **G1 (Numeric):** This column contains the student's first period grade. It is of numeric data type, holding grade values.
+
+32. **G2 (Numeric):**
+The "G2" column represents the student's second period grade. It is of numeric data type, indicating grade values.
+
+33. **G3 (Numeric):** This column contains the student's final grade. It is of numeric data type, holding grade values.
+
+**summary of various numeric columns**
+
+***Age:***
+
+The minimum age of the students is 15 years, indicating the youngest student.
+The maximum age is 22 years, indicating the oldest student.
+The median age is 17 years, which is the middle value when all ages are sorted.
+The mean (average) age is approximately 16.7 years.
+The first quartile (25th percentile) is 16 years, meaning 25% of the students are 16 years old or younger.
+The third quartile (75th percentile) is 18 years, indicating 75% of the students are 18 years old or younger.
+
+***Absences:***
+
+The minimum number of absences is 0, suggesting some students have perfect attendance.
+The maximum number of absences is 75, indicating a student with a relatively high number of absences.
+The median number of absences is 4, representing the middle value when all absences are sorted.
+The mean number of absences is approximately 5.709, indicating the average number of absences.
+The first quartile is 0 absences, implying 25% of students have no recorded absences.
+The third quartile is 8 absences, suggesting 75% of students have 8 absences or fewer.
+
+***Grades (G1, G2, G3):***
+
+The minimum grade in each period (G1, G2, G3) is 3.
+The maximum grade is 19 in each period.
+The median grade in each period is 11, representing the middle value when all grades are sorted.
+The mean grade is around 10.91 for G1, 10.71 for G2, and 10.41 for G3.
+The first quartile for G1, G2, and G3 is 8, suggesting 25% of students have grades 8 or below.
+The third quartile for G1, G2, and G3 is around 13 to 14, indicating 75% of students have grades 13 or below.
+
+Other Numeric Columns (Medu, Fedu, Traveltime, Studytime, Failures, Famrel, Freetime, Goout, Dalc, Walc, Health):
+
+Similar patterns of interpretation apply to these columns. The summary provides information about the minimum, maximum, median, mean, and quartiles for each numeric attribute.
+Overall, this summary provides a comprehensive overview of the distribution and central tendencies (mean, median) of various numeric attributes in the data set. 
+
+# TASK 2: Exploratory Data Analysis (EDA)
+## - Generate visualizations to comprehend the distribution of student grades and other important characteristics.
+
+I divided the variables into Three categories according to the following characteristics:
+
+1. Categorical variables 
+
+2. Discrete Numerical variables 
+
+3. Continuous Numerical variables
+
+After dividing the variables according to the categories mentioned above , I proceeded to generate appropriate visualizations to comprehend the distribution of the various variables.
+
+#### Generating the visualizations for the categorical variables.
+```{r}
+# Load the necessary libraries
+library(ggplot2)
+
+# Categorical variables
+categorical_vars <- c("school", "sex", "address", "famsize", "Pstatus", "Mjob", "Fjob", "reason","guardian", "schoolsup", "famsup", "paid", "activities", "nursery", "higher", "internet", "romantic")
+
+for (var in categorical_vars) {
+  p <- ggplot(student_mat, aes_string(x = var, fill = var)) +
+    geom_bar(stat = "count") +
+    geom_text(stat = "count", aes(label = ..count..), vjust = -0.5, size = 3) +
+    labs(title = paste("Distribution of", var),
+         x = var,
+         y = "Count") +
+    theme_minimal()
+  
+  print(p)
+}
+
+```
+**Interpretation of the Bar Charts:**
+
+**DISTRIBUTION OF SCHOOL:**
+
+The dataset contains students from two schools: "GP" (Gabriel Pereira) and "MS" (Mousinho da Silveira).
+The majority of students belong to the "GP" school (349 students), while a smaller portion belongs to the "MS" school (46 students).
+
+**DISTRIBUTION OF SEX:**
+
+The dataset includes both male and female students.
+The number of female students (208) is slightly higher than the number of male students (187).
+
+**DISTRIBUTION OF ADDRESS:**
+
+The students' addresses are categorized into "R" (rural) and "U" (urban) regions.
+The majority of students reside in urban areas (307 students), while a smaller number reside in rural areas (88 students).
+
+**DISTRIBUTION OF FAMSIZE (Family Size):**
+
+The dataset includes families of different sizes categorized as "GT3" (greater than 3) and "LE3" (less than or equal to 3).
+The majority of students come from families with more than 3 members (GT3, 281 students), while a smaller number come from families with 3 or fewer members (LE3, 114 students).
+
+**DISTRIBUTION OF PSTATUS (Parent's cohabitation status):**
+
+The dataset includes students with parents who are either "A" (apart) or "T" (together).
+The majority of students have parents who are living together (T, 354 students), while a smaller number have parents who are living apart (A, 41 students).
+
+**DISTRIBUTION OF MJOB (Mother's Job) and FJOB (Father's Job):**
+
+The dataset categorizes mother's and father's occupations into "at_home," "health," "other," "services," and "teacher."
+The most common occupation for both mothers and fathers is "other," followed by "services" and "at_home." "Health" and "teacher" occupations are less common.
+
+**DISTRIBUTION OF REASON (Reason to choose the school):**
+
+Students chose the school based on different reasons, including "course," "home," "other," and "reputation."
+The most common reason for choosing the school is the "course" it offers, followed by "reputation" and "home."
+
+**DISTRIBUTION OF GUARDIAN (Student's Guardian):**
+
+The dataset indicates three types of guardians: "father," "mother," and "other."
+The majority of students have their mothers as guardians (273 students), followed by fathers (90 students), and a smaller number have other guardians (32 students).
+
+**DISTRIBUTION OF SCHOOLSUP (Extra Educational Support):**
+
+Students are categorized into "no" and "yes" based on whether they receive extra educational support.
+Most students do not receive extra educational support (344 students), while a smaller number receive such support (51 students).
+
+**DISTRIBUTION OF FAMSUP (Family Educational Support):**
+
+Students are categorized into "no" and "yes" based on whether they receive family educational support.
+A higher number of students receive family educational support (242 students) compared to those who do not (153 students).
+
+**DISTRIBUTION OF PAID (Extra Paid Classes Within the Course Subject):**
+
+Students are categorized into "no" and "yes" based on whether they take extra paid classes within the course subject.
+The number of students taking extra paid classes is relatively lower (181 students) compared to those who do not (214 students).
+
+**DISTRIBUTION OF ACTIVITIES (Extracurricular Activities):**
+
+Students are categorized into "no" and "yes" based on whether they participate in extracurricular activities.
+The number of students participating in extracurricular activities is almost equal to those who do not.
+
+**DISTRIBUTION OF NURSERY (Attended Nursery School):**
+
+Students are categorized into "no" and "yes" based on whether they attended nursery school before primary school.
+The majority of students attended nursery school (314 students), while a smaller number did not (81 students).
+
+**DISTRIBUTION OF HIGHER (Wants to Take Higher Education):**
+
+Students are categorized into "no" and "yes" based on whether they want to pursue higher education.
+The majority of students have a desire to pursue higher education (375 students), while a few students do not (20 students).
+
+**DISTRIBUTION OF INTERNET (Internet Access at Home):**
+
+Students are categorized into "no" and "yes" based on whether they have internet access at home.
+The majority of students have internet access at home (329 students), while a smaller number do not (66 students).
+
+**DISTRIBUTION OF ROMANTIC (In a Romantic Relationship):**
+
+Students are categorized into "no" and "yes" based on whether they are in a romantic relationship.
+The majority of students are not in a romantic relationship (263 students), while a smaller number are (132 students).
+
+#### Generating the visualizations for the Discrete Numerical variables.
+```{r}
+# Load the necessary library
+library(ggplot2)
+
+# Discrete numerical variables
+discrete_numeric_vars <- c("Medu", "Fedu", "traveltime", "studytime", "failures", "famrel",
+                           "freetime", "goout", "Dalc", "Walc", "health")
+
+# Loop through each discrete numerical variable
+for (var in discrete_numeric_vars) {
+  # Create a bar plot
+  p <- ggplot(student_mat, aes_string(x = as.factor(student_mat[[var]]), fill = as.factor(student_mat[[var]]))) +
+    geom_bar() +
+    labs(title = paste("Distribution of", var),
+         x = var,
+         y = "Count") +
+    theme_minimal() +
+    # Add text annotations for count
+    geom_text(stat='count', aes(label=..count..), vjust=-0.5, size=4)
+  
+  # Print the plot
+  print(p)
+}
+
+
+```
+**Interpretation of the Bar Charts:**
+
+**DISTRIBUTION OF MEDU (Mother's Education):**
+
+The majority of students have mothers with a medium level of education (level 2 and 3), with 103 students having a mother with education level 2 and 99 students with education level 3.
+There are relatively fewer students with mothers having lower education levels (level 0 and 1) or higher education levels (level 4).
+
+**DISTRIBUTION OF FEDU (Father's Education):**
+
+The distribution of father's education is similar to that of mother's education, with a higher number of students having fathers with medium education levels (level 2 and 3).
+There are relatively fewer students with fathers having lower education levels (level 0 and 1) or higher education levels (level 4).
+
+**DISTRIBUTION OF TRAVELTIME (Travel Time to School):**
+
+Most students have a travel time of 1 (less than 15 minutes) to reach their school, with 257 students falling into this category.
+Fewer students have longer travel times (levels 2, 3, and 4), with 8 students having a travel time of 4 (more than 60 minutes).
+
+**DISTRIBUTION OF STUDYTIME (Weekly Study Time):**
+
+The majority of students spend 2 to 5 hours per week on studying, with 198 students having a study time of 2 (2 to 5 hours) and 65 students having a study time of 3 (5 to 10 hours).
+Fewer students have shorter study times (level 1, less than 2 hours) or longer study times (level 4, more than 10 hours).
+
+**DISTRIBUTION OF FAILURES (Number of Past Class Failures):**
+
+Most students have not failed any class in the past (312 students with failures level 0).
+There are relatively fewer students who have experienced multiple failures in the past (levels 1, 2, and 3).
+
+**DISTRIBUTION OF FAMREL (Family Relationship Quality):**
+
+The majority of students report having good family relationships (levels 4 and 5).
+There are only a few students who reported lower family relationship quality (levels 1, 2, and 3).
+
+**DISTRIBUTION OF FREETIME (Free Time After School):**
+
+Most students have a moderate amount of free time (levels 3 and 4).
+Fewer students have very little free time (level 1) or a lot of free time (level 5).
+
+**DISTRIBUTION OF GOOUT (Going Out with Friends):**
+
+The distribution of going out with friends is fairly uniform, with the majority of students falling into levels 2 and 3.
+There are fewer students who rarely go out (level 1) or frequently go out (levels 4 and 5).
+
+**DISTRIBUTION OF DALC (Weekday Alcohol Consumption):**
+
+Most students report low weekday alcohol consumption (level 1).
+There are only a few students who report high weekday alcohol consumption (levels 4 and 5).
+
+**DISTRIBUTION OF WALC (Weekend Alcohol Consumption):**
+
+Similar to weekday alcohol consumption, most students report low weekend alcohol consumption (level 1).
+There are relatively fewer students who report high weekend alcohol consumption (levels 4 and 5).
+
+**DISTRIBUTION OF HEALTH (Self-reported Health Status):**
+
+Most students report good or very good health (levels 4 and 5).
+There are only a few students who report lower health status (levels 1 and 2).
+
+#### Generating the visualizations for the Continuous Numerical variables.
+```{r}
+# Load the necessary library
+library(ggplot2)
+
+# Continuous numerical variables
+continuous_numeric_vars <- c("age", "absences", "G1", "G2", "G3")
+
+# Loop through each continuous numerical variable
+for (var in continuous_numeric_vars) {
+  # Create a density plot
+  p <- ggplot(student_mat, aes_string(x = var)) +
+    geom_density(fill = "purple", alpha = 0.5) +
+    labs(title = paste("Distribution of", var),
+         x = var,
+         y = "Density") +
+    theme_minimal()
+  
+  # Print the plot
+  print(p)
+}
+
+
+```
+**DISTRIBUTION OF AGE**
+The distribution of age appears to be somewhat positively skewed with the following observations:
+
+Minimum Age: The minimum age of students in the dataset is not mentioned, but it can be inferred that it is likely greater than 15 since the dataset includes students in the age range of 15-22.
+
+Median Age: Since the data is somewhat positively skewed, the median age is expected to be less than the mean age.
+
+Maximum Age: The maximum age of students in the dataset is 22, which indicates that the dataset includes students up to the age of 22 years.
+
+Skewness: The positive skewness suggests that the tail of the distribution is stretched towards higher ages. This means that there are relatively fewer students in the older age groups and more students in the younger age groups.
+
+The age column has a non-normal distribution.
+
+Interpretation: The distribution of age indicates that there are a larger number of students in the younger age groups (around 16-18 years) and relatively fewer students in the older age groups (above 18 years). This distribution is common in educational datasets, as it typically includes students in a specific grade range, and the number of students decreases as they progress to higher grades.
+
+**DISTRIBUTION OF ABSENCES**
+
+Minimum Absences: The minimum number of absences is 0, indicating that some students did not miss any classes.
+
+Median Absences: Since the data is somewhat positively skewed, the median number of absences is expected to be less than the mean number of absences.
+
+Maximum Absences: The maximum number of absences is 75, indicating that some students had a relatively high number of absences.
+
+Skewness: The positive skewness suggests that the tail of the distribution is stretched towards higher numbers of absences. This means that there are relatively fewer students with very low absences and more students with higher absences.
+
+The absences column has a non-normal distribution.
+
+In conclusion the density plot of absences is showing a positively skewed distribution.This is because most students have a low number of absences, leading to a peak in the density plot at lower values. However, there is long tail towards higher values of absences, representing the few students with a large number of absences.
+
+**DISTRIBUTION FOR G1**
+
+Minimum G1: The minimum G1 score is 0, indicating that some students did not achieve any marks in the first period.
+
+Median G1: Since the data is somewhat positively skewed, the median G1 score is expected to be less than the mean G1 score.
+
+Maximum G1: The maximum G1 score is [maximum value], indicating that some students scored relatively high marks in the first period.
+
+Skewness: The positive skewness suggests that the tail of the distribution is stretched towards higher G1 scores. This means that there are relatively fewer students with very low G1 scores and more students with higher G1 scores.
+
+The G1 column has a non-normal distribution.
+
+In conclusion, the density plot of G1 scores shows a positively skewed distribution. This is because most students achieved relatively low scores in the first period, leading to a peak in the density plot at lower values. However, there is a long tail towards higher values of G1 scores, representing the few students with high scores in the first period. This skewness in the distribution indicates that there is variability in the performance of students, with a larger proportion of students scoring lower marks compared to students with higher marks in G1.
+
+**DISTRIBUTION FOR G2**
+
+Minimum G2: The minimum G2 score is 0, indicating that some students did not achieve any marks in the second period.
+
+Median G2: Since the data is somewhat positively skewed, the median G2 score is expected to be less than the mean G2 score.
+
+Maximum G2: The maximum G2 score is above 15, indicating that some students scored relatively high marks in the second period.
+
+Outliers: There are some outliers with a value of 0 in the G2 scores, which means that a few students scored 0 in the second period. These outliers could be considered unusual or extreme values compared to the rest of the data.
+
+Skewness: The positive skewness suggests that the tail of the distribution is stretched towards higher G2 scores. This means that there are relatively fewer students with very low G2 scores and more students with higher G2 scores.
+
+The G2 column has a non-normal distribution.
+
+In conclusion, the density plot of G2 scores shows a positively skewed distribution with some outliers at a value of 0. This suggests that most students achieved relatively low scores in the second period, leading to a peak in the density plot at lower values. However, there is a long tail towards higher values of G2 scores, representing the few students with high scores in the second period. The presence of outliers further indicates the variability in the performance of students, with a larger proportion of students scoring lower marks compared to students with higher marks in G2.
+
+**DISTRIBUTION OF G3**
+
+Minimum G3: The minimum G3 score is 0, indicating that some students did not achieve any marks in the final period.
+
+Median G3: Since the data is somewhat positively skewed, the median G3 score is expected to be less than the mean G3 score.
+
+Maximum G3: The maximum G3 score is above 15, indicating that some students scored relatively high marks in the final period.
+
+Outliers: There might be some outliers in the G3 scores, which means that a few students might have achieved extremely low or high scores in the final period. These outliers could be considered unusual or extreme values compared to the rest of the data.
+
+Skewness: The positive skewness suggests that the tail of the distribution is stretched towards higher G3 scores. This means that there are relatively fewer students with very low G3 scores and more students with higher G3 scores.
+
+The G3 column has a non-normal distribution.
+
+In conclusion, the density plot of G3 scores shows a positively skewed distribution with the possibility of outliers. This suggests that while most students achieved relatively low scores in the final period, there are some students who scored exceptionally high marks. The presence of outliers indicates the variability in the performance of students, with a larger proportion of students scoring lower marks compared to students with higher marks in G3. The positively skewed distribution further emphasizes that a majority of students scored moderately well, with a tail towards higher scores, indicating a smaller number of high-achieving students.
+
+## - Examine the distribution of grades and look for any outliers.
+
+```{r}
+# Load the necessary library
+library(ggplot2)
+
+# Grade variables
+grades_vars <- c("G1", "G2", "G3")
+
+# Loop through each continuous numerical variable
+for (var in grades_vars) {
+  # Create a density plot
+  p <- ggplot(student_mat, aes_string(x = var)) +
+    geom_density(fill = "blue", alpha = 0.5) +
+    labs(title = paste("Distribution of", var),
+         x = var,
+         y = "Density") +
+    theme_minimal()
+  
+  # Print the plot
+  print(p)
+}
+```
+**DISTRIBUTION FOR G1**
+
+There are no Outliers
+
+Minimum G1: The minimum G1 score is 0, indicating that some students did not achieve any marks in the first period.
+
+Median G1: Since the data is somewhat positively skewed, the median G1 score is expected to be less than the mean G1 score.
+
+Maximum G1: The maximum G1 score is [maximum value], indicating that some students scored relatively high marks in the first period.
+
+Skewness: The positive skewness suggests that the tail of the distribution is stretched towards higher G1 scores. This means that there are relatively fewer students with very low G1 scores and more students with higher G1 scores.
+
+The G1 column has a non-normal distribution.
+
+In conclusion, the density plot of G1 scores shows a positively skewed distribution. This is because most students achieved relatively low scores in the first period, leading to a peak in the density plot at lower values. However, there is a long tail towards higher values of G1 scores, representing the few students with high scores in the first period. This skewness in the distribution indicates that there is variability in the performance of students, with a larger proportion of students scoring lower marks compared to students with higher marks in G1.
+
+**DISTRIBUTION FOR G2**
+
+Minimum G2: The minimum G2 score is 0, indicating that some students did not achieve any marks in the second period.
+
+Median G2: Since the data is somewhat positively skewed, the median G2 score is expected to be less than the mean G2 score.
+
+Maximum G2: The maximum G2 score is above 15, indicating that some students scored relatively high marks in the second period.
+
+Outliers: There are some outliers with a value of 0 in the G2 scores, which means that a few students scored 0 in the second period. These outliers could be considered unusual or extreme values compared to the rest of the data.
+
+Skewness: The positive skewness suggests that the tail of the distribution is stretched towards higher G2 scores. This means that there are relatively fewer students with very low G2 scores and more students with higher G2 scores.
+
+The G2 column has a non-normal distribution.
+
+In conclusion, the density plot of G2 scores shows a positively skewed distribution with some outliers at a value of 0. This suggests that most students achieved relatively low scores in the second period, leading to a peak in the density plot at lower values. However, there is a long tail towards higher values of G2 scores, representing the few students with high scores in the second period. The presence of outliers further indicates the variability in the performance of students, with a larger proportion of students scoring lower marks compared to students with higher marks in G2.
+
+**DISTRIBUTION OF G3**
+
+Minimum G3: The minimum G3 score is 0, indicating that some students did not achieve any marks in the final period.
+
+Median G3: Since the data is somewhat positively skewed, the median G3 score is expected to be less than the mean G3 score.
+
+Maximum G3: The maximum G3 score is above 15, indicating that some students scored relatively high marks in the final period.
+
+Outliers: There might be some outliers in the G3 scores, which means that a few students might have achieved extremely low or high scores in the final period. These outliers could be considered unusual or extreme values compared to the rest of the data.
+
+Skewness: The positive skewness suggests that the tail of the distribution is stretched towards higher G3 scores. This means that there are relatively fewer students with very low G3 scores and more students with higher G3 scores.
+
+The G3 column has a non-normal distribution.
+
+In conclusion, the density plot of G3 scores shows a positively skewed distribution with the possibility of outliers. This suggests that while most students achieved relatively low scores in the final period, there are some students who scored exceptionally high marks. The presence of outliers indicates the variability in the performance of students, with a larger proportion of students scoring lower marks compared to students with higher marks in G3. The positively skewed distribution further emphasizes that a majority of students scored moderately well, with a tail towards higher scores, indicating a smaller number of high-achieving students.
+
+
+## - Examine the connection between study time and final grade
+```{r}
+# Load the necessary library
+library(ggplot2)
+
+# Create a box plot for study time and final grade
+ggplot(student_mat, aes(x = factor(studytime), y = G3, fill = factor(studytime))) +
+  geom_boxplot() +
+  labs(title = "Study Time vs. Final Grade",
+       x = "Study Time",
+       y = "Final Grade (G3)",
+       fill = "Study Time") +
+  theme_minimal()
+```
+From the box plot, we can examine the connection between study time and final grade for different categories of study time (1, 2, 3, and 4). Here are the key observations:
+
+**Study Time Category 1:**
+
+- Minimum: 5
+
+- Q1 (25th percentile): 8
+
+- Median (50th percentile): 10
+
+- Q3 (75th percentile): 13
+
+- Maximum: 19
+
+- There are outliers with values of zero.
+
+**Study Time Category 2:**
+
+- Minimum: 4
+
+- Q1 (25th percentile): 8
+
+- Median (50th percentile): 11
+
+- Q3 (75th percentile): 13
+
+- Maximum: 19
+
+- There are outliers with values of zero.
+
+**Study Time Category 3:**
+
+- Minimum: 7
+
+- Q1 (25th percentile): 10
+
+- Median (50th percentile): 12
+
+- Q3 (75th percentile): 15
+
+- Maximum: 19
+
+- There are outliers with values of zero.
+
+**Study Time Category 4:**
+
+- Minimum: 6
+
+- Q1 (25th percentile): 9
+
+- Median (50th percentile): 12
+
+- Q3 (75th percentile): 14.5
+
+- Maximum: 19
+
+- There are outliers with values of zero.
+
+**Interpretation:**
+
+- Overall, as the study time category increases from 1 to 4, the median final grade (G3) tends to increase. This suggests a positive connection between study time and final grades. Students who spend more time studying tend to achieve higher grades on average.
+
+- There are outliers with values of zero in all study time categories. This indicates that some students who spend very little time studying (study time category 1) or no time studying at all (value of zero) still manage to achieve high grades. This could be due to various factors such as natural aptitude, effective learning strategies, or other external influences.
+
+-Study time category 3 appears to have the highest median final grade, followed closely by category 4, then category 2, and finally category 1. This suggests that spending more time studying is generally associated with better academic performance.
+
+- Study time category 3 has the highest median final grade (12), which means that students in this category, on average, achieve higher grades compared to students in other study time categories. Additionally, the 75th percentile (Q3) is relatively high (15), indicating that a significant proportion of students in this category perform well and achieve higher grades.
+
+In conclusion, the box plot reveals a positive connection between study time and final grades, but there are exceptions in the form of outliers with high grades even in categories with low study time. 
+
+# TASK 3: Correlation Analysis 
+## - Compute the correlation matrix to find links between various factors and student performance.
+## - To effectively display the associations, use a heatmap visualization.
+
+
+```{r}
+# Load the necessary libraries
+library(ggplot2)
+library(reshape2)
+
+# Select the relevant numerical variables for correlation analysis
+correlation_vars <- c("age", "Medu", "Fedu", "traveltime", "studytime", "failures", "famrel",
+                      "freetime", "goout", "Dalc", "Walc", "health", "absences", "G1", "G2", "G3")
+
+# Compute the correlation matrix
+correlation_matrix <- cor(student_mat[correlation_vars])
+
+# Convert the correlation matrix to a long format for visualization
+correlation_data <- melt(correlation_matrix)
+
+# Create a heatmap visualization with customized colors
+heatmap_plot <- ggplot(correlation_data, aes(Var1, Var2, fill = value)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "blue", mid = "pink", high = "red", midpoint = 0,
+                       limits = c(-1, 1), name = "Correlation") +
+  labs(title = "Correlation Heatmap",
+       x = "Variables",
+       y = "Variables",
+       fill = "Correlation") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Calculate the correlation values
+correlation_values <- as.data.frame(as.table(correlation_matrix))
+colnames(correlation_values) <- c("Variable1", "Variable2", "Correlation")
+
+# Print the heatmap
+print(heatmap_plot)
+
+# Print the correlation values
+print(correlation_matrix)
+
+
+
+```
+I decided to focus on the variables with the weakest and strongest correlations.
+
+In the correlation heatmap, the variables with the strongest positive correlations are:
+
+G2 and G3 (Second period grade and Final grade): 0.905
+
+This indicates a very strong positive relationship between a student's performance in the second period and their final grade. Students who perform well in the second period are likely to achieve high final grades.
+G1 and G2 (First period grade and Second period grade): 0.852
+
+There is a strong positive relationship between a student's performance in the first period and their performance in the second period. Good performance in the first period is associated with good performance in the second period.
+On the other hand, the variables with the weakest correlations are:
+
+AGE and STUDYTIME (Age and Study Time): -0.004
+
+There is a very weak negative correlation between a student's age and the time they spend studying per week. This suggests that age has little to no impact on study time.
+FAMREL and AGE (Family Relationships and Age): -0.018
+
+There is a very weak negative correlation between a student's family relationships and their age. This indicates that family relationships are not significantly affected by age.
+
+# TASK 4: Group Comparison 
+## - Use box plots to compare student achievement across various schools.
+```{r}
+# Load the necessary libraries
+library(ggplot2)
+
+# Create box plots for G3 by school
+ggplot(student_mat, aes(x = school, y = G3, fill = school)) +
+  geom_boxplot() +
+  labs(title = "Student Achievement Across Schools",
+       x = "School",
+       y = "Final Grade (G3)") +
+  theme_minimal()
+
+```
+GP: MIN-0, Q1-8, MEDIAN-11, Q3-14, MAX-19
+
+MS:MIN-5 ,Q1-8,MEDIAN-10, Q3-12.75, MAX-19
+
+The box plot visualization compares the student achievement (final grade, G3) across two schools, "GP" and "MS." Each box plot represents the distribution of final grades for each school, and the outliers are marked as individual points outside the whiskers.
+
+**Interpretation:**
+
+**Central Tendency:** The box plot shows that the median final grade for students in "GP" (median=11) is slightly higher than in "MS" (median=10). This suggests that, on average, students in "GP" performed slightly better than students in "MS."
+
+**Spread:** The interquartile range (IQR) for "GP" (Q1=8, Q3=14) is wider than "MS" (Q1=8, Q3=12.75). This indicates that there is more variability in final grades among students in "GP" compared to "MS."
+
+**Outliers:** There is an outlier with a value of 0 in "MS," which represents a student with an extremely low final grade. This may indicate that something unusual or atypical happened to that student, leading to the unusually low grade.
+
+**Range:** The minimum and maximum final grades for "GP" are 0 and 19, respectively, while for "MS," the minimum and maximum final grades are 5 and 19, respectively. Both schools have a similar maximum grade, but the minimum grade for "MS" is higher than "GP," suggesting that "MS" has no grades below 5.
+
+In conclusion, the box plot comparison suggests that student achievement is slightly higher in "GP" (as indicated by the median grade) and that there is more grade variability within "GP" compared to "MS."
+
+### ANALYZING THE GRADE VARIANCES BY GUARDIAN 
+
+```{r}
+# Grouped box plot to analyze grade variances by guardian
+boxplot_guardian <- ggplot(student_mat, aes(x = guardian, y = G3, fill = guardian)) +
+  geom_boxplot() +
+  labs(title = "Grade Variances by Guardian",
+       x = "Guardian",
+       y = "Final Grade (G3)",
+       fill = "Guardian") +
+  theme_minimal()
+
+print(boxplot_guardian)
+```
+Based on the grouped box plot analyzing grade variances by guardian, we can make the following observations:
+
+**Father as Guardian:** The distribution of final grades (G3) for students with fathers as guardians ranges from a minimum of 5 to a maximum of 18. The first quartile (Q1) is at 9, the median is at 11, and the third quartile (Q3) is at 14. There are also outliers with 0 values. The grades show a spread of 13 points from Q1 to Q3, indicating moderate variability.
+
+**Mother as Guardian:** The distribution of final grades (G3) for students with mothers as guardians ranges from a minimum of 0 to a maximum of 19. The first quartile (Q1) is at 8, the median is at 11, and the third quartile (Q3) is at 14. There are no outliers present. The grades show a spread of 6 points from Q1 to Q3, indicating a relatively lower variability compared to the other groups.
+
+**Other as Guardian:** The distribution of final grades (G3) for students with other guardians (neither father nor mother) ranges from a minimum of 7 to a maximum of 18. The first quartile (Q1) is at 8, the median is at 9.5, and the third quartile (Q3) is at 12. There are no outliers present. The grades show a spread of 4 points from Q1 to Q3, indicating the lowest variability among the three groups.
+
+**Interpretation:**
+Father vs. Mother as Guardian: The distribution of final grades for students with fathers as guardians has a slightly higher median (11) compared to students with mothers as guardians (median of 11). However, there are outliers with 0 values in the father group, which might indicate some academic challenges for a few students.
+
+**Other vs. Father/Mother as Guardian:** Students with other guardians show the lowest spread of final grades (Q3-Q1 = 4), indicating a more consistent academic performance compared to students with fathers or mothers as guardians.
+
+**Comparison of Variability:** The interquartile range (IQR) is a measure of the variability in the data. A smaller IQR suggests less variability and indicates a more consistent performance within the group. From the box plots, it appears that students with other guardians have the least variability, followed by students with mothers as guardians, while students with fathers as guardians show relatively higher variability.
+
+From the bar plot in Task 2, we got the following as the distributions in the "guardian column:
+
+-Father as Guardian: There are 90 students with fathers as guardians.
+
+-Mother as Guardian: There are 273 students with mothers as guardians.
+
+-Other as Guardian: There are 32 students with other guardians.
+
+The sample sizes for each group are different, which means that certain groups might have more statistical power or influence over the overall analysis than others. In this case, the larger group of students with mothers as guardians (273) would likely have a more substantial impact on the overall results compared to the smaller groups of students with fathers (90) or other guardians (32).
+
+To account for the differece in distribution , I decided to do a weighted analysis. 
+
+```{r}
+# Load necessary libraries
+library(survey)
+
+# Calculate weights based on the frequency of each guardian category
+weights <- ifelse(student_mat$guardian == "father", 1,
+                  ifelse(student_mat$guardian == "mother", 1,
+                         ifelse(student_mat$guardian == "other", 1, 1)))
+
+# Create a survey design with weights
+survey_design <- svydesign(ids = ~1, weights = ~weights, data = student_mat)
+
+# Calculate weighted means for G3 by guardian
+weighted_means <- svytotal(~G3, by = ~guardian, design = survey_design)
+
+# Calculate standard errors for G3 by guardian
+weighted_se <- svyby(~G3, by = ~guardian, design = survey_design, svytotal)
+
+# Print the results
+print(weighted_means)
+print(weighted_se)
+
+```
+**Weighted Analysis Results:**
+
+The weighted analysis considered the sample sizes for each group, providing more accurate estimates for the overall population.
+The overall weighted mean for G3 was 4113, with a standard error of 90.954. This standard error represents the uncertainty in the estimated mean.
+The weighted mean for students with mothers as guardians was 2861, which was higher than the mean for students with fathers (962) or other guardians (290).
+
+**Interpretation of Weighted Means:**
+
+-Students with mothers as guardians, on average, obtained the highest final grades (weighted mean of 2861).
+
+-Students with fathers as guardians had the second-highest average final grades (weighted mean of 962).
+
+-Students with other guardians had the lowest average final grades (weighted mean of 290).
+
+**Standard Errors Interpretation:**
+
+The standard error for G3 (90.954) indicates that the estimate of the overall mean final grade (4113) has some uncertainty, and the true population mean may fall within a range of ±90.954.
+
+The standard errors for each guardian category represent the variability in the estimates within each group.
+
+The standard error for students with mothers as guardians (122.59166) is higher than that for students with fathers (98.68007) or other guardians (55.72207), indicating higher uncertainty in the estimated mean for this group.
+
+**Sample Sizes Consideration:**
+
+The larger sample size for students with mothers as guardians (273) compared to the other groups may have a greater impact on the overall results.
+
+Visualizing a bar plot with error bars to visualize the grade variances according to guardian taking into account the weights
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+
+# Create a data frame for the plot
+data_plot <- data.frame(
+  guardian = c("Father", "Mother", "Other"),
+  mean_grade = c(962, 2861, 290),
+  se = c(98.68007, 122.59166, 55.72207)
+)
+
+# Plot the grade variances by guardian
+plot_guardian_variances <- ggplot(data_plot, aes(x = guardian, y = mean_grade, fill = guardian)) +
+  geom_col(position = "dodge") +
+  geom_errorbar(aes(ymin = mean_grade - se, ymax = mean_grade + se),
+                width = 0.25, position = position_dodge(width = 0.9)) +
+  labs(title = "Grade Variances by Guardian",
+       x = "Guardian",
+       y = "Mean Final Grade (G3)",
+       fill = "Guardian") +
+  theme_minimal()
+
+print(plot_guardian_variances)
+
+```
+**Mean Grades (Bar Heights):** The heights of the bars represent the mean final grades (G3) for each guardian category. In this case, the bar for "Father" is at approximately 962, "Mother" is at 2861, and "Other" is at 290.
+
+**Interpreting Error Bars for "Father" Category:** The bar for "Father" has an error bar that extends from around 864 to 1060. This means that, based on the sample data, the mean final grade for students with fathers as guardians is estimated to be around 962, with a standard error of approximately 98. So, we are relatively confident that the true mean falls within the range of 864 to 1060.
+
+**Interpreting Error Bars for "Mother" Category:** The bar for "Mother" has an error bar that extends from around 2738 to 2984. This indicates that the mean final grade for students with mothers as guardians is estimated to be around 2861, with a standard error of approximately 123. Thus, we are relatively confident that the true mean falls within the range of 2738 to 2984.
+
+**Interpreting Error Bars for "Other" Category:** The bar for "Other" has an error bar that extends from around 235 to 345. This suggests that the mean final grade for students with other guardians is estimated to be around 290, with a standard error of approximately 56. Hence, we are relatively confident that the true mean falls within the range of 235 to 345.
+
+The order of variability, from least to greatest, based on the lengths of the error bars in the plot, is as follows:
+
+1. Other: This category has the smallest error bar, indicating the least variability in mean grades.
+
+2. Mother: The error bar for this category is larger than the "Other" category but smaller than the "Father" category, suggesting moderate variability in mean grades.
+
+3. Father: This category has the largest error bar, indicating higher variability in mean grades compared to the other two categories.
+
+In summary, the order of variability, from the least to the greatest, is: Other < Mother < Father.
+
+In conclusion, by examining the lengths of the error bars, we can assess the variability in mean grades across the guardian categories. Smaller error bars indicate less variability and greater precision in the estimates. From the plot, we can see that the "Other" category has the smallest error bar, indicating the least variability in mean grades, followed by "Mother," while the "Father" category has the largest error bar, suggesting higher variability in mean grades.
+
+### ANALYZING THE GRADE VARIANCES BY SEX
+```{r}
+# Load the necessary libraries
+library(ggplot2)
+
+# Create a box plot for G3 and sex
+ggplot(student_mat, aes(x = sex, y = G3, fill = sex)) +
+  geom_boxplot() +
+  labs(title = "Final Grade (G3) Variance by Sex",
+       x = "Sex",
+       y = "Final Grade (G3)") +
+  theme_minimal()
+
+```
+
+Based on the box plot we can interpret the G3 variance according to sex as follows:
+
+**Female (F):**
+- Minimum (Min): 4
+- First Quartile (Q1): 8
+- Median: 10
+- Third Quartile (Q3): 13
+- Maximum (Max): 19
+
+**Male (M):**
+- Minimum (Min): 5
+- First Quartile (Q1): 9
+- Median: 11
+- Third Quartile (Q3): 14
+- Maximum (Max): 20
+
+## Interpretation:
+
+Both females and males have similar distributions of final grades (G3) with median scores around 10 and 11, respectively.
+
+Females generally have a slightly narrower distribution of grades compared to males as indicated by the smaller interquartile range (IQR) of 5 (Q3 - Q1) compared to 5 (Q3 - Q1) for males.
+
+The IQR for Females (Q3 - Q1 = 13 - 8 = 5) is the same as that for Males (Q3 - Q1 = 14 - 9 = 5). This indicates that the spread of final grades within both groups is similar.
+
+The median score for Females (10) is slightly lower than that for Males (11). This suggests that, on average, Male students tend to have slightly higher final grades.
+
+There are some outliers in both categories, with the lowest score being 0, indicating that a few students from both groups scored very low in their final grades.
+The maximum grade achieved by males (20) is slightly higher than that of females (19).
+
+In order to get a better value , I decided to do a weighted analyses in order to account for the differences in gender distributions:
+
+Female- 208
+
+Male- 187
+
+
+```{r}
+#Getting the weights
+# Load necessary libraries
+library(survey)
+
+# Calculate weights based on the frequency of each sex category
+weights1 <- ifelse(student_mat$sex == "F", 1,
+                  ifelse(student_mat$sex == "M", 1, 1))
+
+# Create a survey design with weights
+survey_design1 <- svydesign(ids = ~1, weights1 = ~weights1, data = student_mat)
+
+# Calculate weighted means for G3 by sex
+weighted_means1 <- svytotal(~G3, by = ~sex, design = survey_design1)
+
+# Calculate standard errors for G3 by sex
+weighted_se1 <- svyby(~G3, by = ~sex, design = survey_design1, svytotal)
+
+# Print the results
+print(weighted_means1)
+print(weighted_se1)
+
+```
+creating a bar plot with error bars to visualize the grade variances by sex, taking into account the weights:
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+
+# Create a data frame for the plot
+data_plot1 <- data.frame(
+  sex = c("Female", "Male"),
+  mean_grade1 = c(2073, 2040),
+  se1 = c(119.3304, 124.4972)
+)
+
+# Plot the grade variances by sex
+plot_sex_variances <- ggplot(data_plot1, aes(x = sex, y = mean_grade1, fill = sex)) +
+  geom_col(position = "dodge") +
+  geom_errorbar(aes(ymin = mean_grade1 - se1, ymax = mean_grade1 + se1),
+                width = 0.25, position = position_dodge(width = 0.9)) +
+  labs(title = "Grade Variances by Sex",
+       x = "Sex",
+       y = "Mean Final Grade (G3)",
+       fill = "Sex") +
+  theme_minimal()
+
+print(plot_sex_variances)
+
+```
+**Grade Variances by Sex:**
+The bar plot compares the mean final grades (G3) for female and male students. The heights of the bars represent the weighted mean grades, while the error bars indicate the uncertainty or variability around these means.
+
+**Female Students:** The bar for female students shows a mean final grade of approximately 2073, with an error bar extending from about 1953 to 2193. This means that the estimated mean final grade for female students is 2073, and we are 95% confident that the true mean lies within the range of 1953 to 2193. The error bar indicates the uncertainty or variability in the estimation due to the sample's size and weighting.
+
+**Male Students:** The bar for male students shows a mean final grade of approximately 2040, with an error bar extending from about 1916 to 2163. This means that the estimated mean final grade for male students is 2040, and we are 95% confident that the true mean lies within the range of 1916 to 2163. The error bar indicates the uncertainty or variability in the estimation due to the sample's size and weighting.
+
+**Comparison:** From the bar plot, we can observe that the mean final grades for female students (2073) and male students (2040) are relatively close. The difference in mean grades is approximately 33 points, favoring female students, but this difference may not be statistically significant due to the overlap in the error bars. The error bars for both groups indicate that there is uncertainty in the estimation, and the true mean grades may vary within the indicated ranges.
+
+**Interpretation of Error Bars:**
+The error bars help us understand the variability or uncertainty associated with the mean estimates. Larger error bars suggest higher variability, meaning that the estimates may vary widely from sample to sample. Smaller error bars suggest less variability and greater precision in the mean estimates. In this case, the error bars for female and male students are quite similar in length, indicating ***similar levels of variability*** in their mean grades.
+
+In conclusion based on this analysis, we can say that there is no significant difference in the mean final grades between female and male students in the dataset. 
+
+### ANALYZING THE GRADE VARIANCES BY FAMILY SIZE
+```{r}
+# Load the necessary libraries
+library(ggplot2)
+
+# Create a box plot for G3 and family size
+ggplot(student_mat, aes(x = famsize, y = G3, fill = famsize)) +
+  geom_boxplot() +
+  labs(title = "Final Grade (G3) Variance by Family Size",
+       x = "Family Size",
+       y = "Final Grade (G3)") +
+  theme_minimal()
+
+```
+Based on the box plot analyzing grade variances by family size, we can make the following observations:
+
+GT3 (Greater Than 3): The distribution of final grades (G3) for students with family size greater than 3 ranges from a minimum of 0 to a maximum of 19. The first quartile (Q1) is at 8, the median is at 11, and the third quartile (Q3) is at 14. There are no outliers present in this group, except for an outlier with a value of 0. The grades show a spread of 6 points from Q1 to Q3, indicating a relatively lower variability compared to the LT3 group.
+
+LT3 (Less Than or Equal to 3): The distribution of final grades (G3) for students with family size less than or equal to 3 ranges from a minimum of 4 to a maximum of 19. The first quartile (Q1) is at 9, the median is at 11, and the third quartile (Q3) is at 13.75. There is an outlier in this group with a value of 0. The grades show a spread of 4.75 points from Q1 to Q3, indicating a moderate variability in academic performance.
+
+Interpretation:
+
+From the box plot, it appears that students with a family size greater than 3 (GT3) tend to have slightly more consistent academic performance compared to students with a family size less than or equal to 3 (LT3). This is evident from the smaller spread of grades in the GT3 group (6 points) compared to the LT3 group (4.75 points).
+
+However, it's essential to note that both groups have similar median grades (both at 11), indicating that the central tendency of grades is comparable between the two family size categories.
+
+In order to take into account the differences in distributions of the family , I decided to conduct a weighted analysis to ensure a more accurate account of the grade variances.
+
+The family sizes distributions, as shown in task 2 are as follows:
+
+GT3-281
+
+LE3-114
+
+```{r}
+# Load necessary libraries
+library(survey)
+
+# Create a weight variable based on the family size category
+weights2 <- ifelse(student_mat$famsize == "GT3", 1,
+                  ifelse(student_mat$famsize == "LT3", 1, 1))
+
+# Create a survey design with weights
+survey_design2 <- svydesign(ids = ~1, weights = ~weights2, data = student_mat)
+
+# Calculate weighted means for G3 by family size
+weighted_means2 <- svytotal(~G3, by = ~famsize, design = survey_design2)
+
+# Calculate standard errors for G3 by family size
+weighted_se2 <- svyby(~G3, by = ~famsize, design = survey_design2, svytotal)
+
+# Print the results
+print(weighted_means2)
+print(weighted_se2)
+
+
+```
+We can see the results of the weighted analysis for grade variances by family size (famsize).
+
+Weighted Means for G3 by Family Size:
+
+GT3 (Greater than 3 family members): The weighted mean final grade (G3) for students with family size GT3 is approximately 2859.
+
+LE3 (Less than or equal to 3 family members): The weighted mean final grade (G3) for students with family size LE3 is approximately 1254.
+
+Standard Errors (SE) for G3 by Family Size:
+
+GT3 (Greater than 3 family members): The standard error for the weighted mean final grade (G3) for students with family size GT3 is approximately 120.8744.
+
+LE3 (Less than or equal to 3 family members): The standard error for the weighted mean final grade (G3) for students with family size LE3 is approximately 108.9081.
+
+Interpretation:
+
+The weighted analysis allows us to account for the differences in the distribution of family size categories in the dataset. From the results, we can see that students with family size GT3 (greater than 3 family members) have a higher weighted mean final grade (approximately 2859) compared to students with family size LE3 (less than or equal to 3 family members) with a weighted mean final grade of approximately 1254.
+
+creating a bar plot with error bars to visualize the grade variances by Family size , taking into account the weights:
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+
+# Create a data frame for the plot
+data_plot2 <- data.frame(
+  famsize = c("GT3", "LE3"),
+  mean_grade2 = c(2859, 1254),
+  se2 = c(120.8744, 108.9081)
+)
+
+# Plot the grade variances by family size
+plot_family_size_variances <- ggplot(data_plot2, aes(x = famsize, y = mean_grade2, fill = famsize)) +
+  geom_col(position = "dodge") +
+  geom_errorbar(aes(ymin = mean_grade2 - se2, ymax = mean_grade2 + se2),
+                width = 0.25, position = position_dodge(width = 0.9)) +
+  labs(title = "Grade Variances by Family Size",
+       x = "Family Size",
+       y = "Mean Final Grade (G3)",
+       fill = "Family Size") +
+  theme_minimal()
+
+print(plot_family_size_variances)
+```
+The plot shows the grade variances based on family size categories "GT3" (Greater than 3 family members) and "LE3" (Less than or equal to 3 family members).
+
+**For the "GT3" family size category:**
+
+The mean final grade is approximately 2859, and the error bars span from around 2738 to 2980.
+The range of the error bars (i.e., 2980 - 2738) is approximately 242. This indicates that there is some variability in the mean final grades for students with family size "GT3."
+
+**For the "LE3" family size category:**
+
+The mean final grade is approximately 1254, and the error bars span from around 1145 to 1363.
+The range of the error bars (i.e., 1363 - 1145) is approximately 218. This indicates that there is some variability in the mean final grades for students with family size "LE3."
+
+In summary, both family size categories exhibit some variability in the mean final grades, with "GT3" having a slightly larger range of variability compared to "LE3." Since the range of the error bars for "GT3" is larger, it indicates that there is more variability in the mean final grades for students with family size greater than 3 compared to students with family size less than or equal to 3. Therefore, "GT3" exhibits a larger grade variance.
+
+- Conducting an F-Test to determine if the difference in grade variability is significant:
+
+The null hypothesis (H0) states that the true ratio of variances between the two groups is equal to 1.
+
+The alternative hypothesis (Ha) states that the true ratio of variances is not equal to 1 (implying that there is a significant difference in variances between the two groups.)
+
+```{r}
+# Subset the data for "LE3" and "GT3" family size categories
+data_LE3 <- subset(student_mat, famsize == "LE3")
+data_GT3 <- subset(student_mat, famsize == "GT3")
+
+# Perform F-test to compare variances
+result <- var.test(data_LE3$G3, data_GT3$G3)
+
+# Print the result
+print(result)
+
+```
+Based on the F-test results, the p-value is 0.1945, which is greater than the typical significance level of 0.05. Therefore, we do not have enough evidence to reject the null hypothesis. The null hypothesis states that the true ratio of variances is equal to 1, which means that the variability of grades in "LE3" (family size less than or equal to 3) is not significantly different from the variability of grades in "GT3" (family size greater than 3).
+
+In conclusion, although "GT3" has a larger grade variability, there is no statistically significant difference in grade variability between students from families with a size less than or equal to 3 and families with a size greater than 3.
+
+### ANALYZING THE GRADE VARIANCES BY PARENT'S COHABITATION STATUS
+
+```{r}
+# Grouped box plot to analyze grade variances by Pstatus
+boxplot_pstatus <- ggplot(student_mat, aes(x = Pstatus, y = G3, fill = Pstatus)) +
+  geom_boxplot() +
+  labs(title = "Grade Variances by Parent's Cohabitation Status",
+       x = "Parent's Cohabitation Status",
+       y = "Final Grade (G3)",
+       fill = "Parent's Cohabitation Status") +
+  theme_minimal()
+
+print(boxplot_pstatus)
+
+```
+
+Outlier in Category "A": The "A" category has an outlier with a value of zero, indicating a student with an extremely low final grade compared to the rest of the students in this category.
+
+Summary of Statistics for Categories:
+
+**Parent's Cohabitation Status "A":**
+
+Minimum G3: 6
+
+First Quartile (Q1): 9
+
+Median: 11
+
+Third Quartile (Q3): 13
+
+Maximum G3: 19
+
+**Parent's Cohabitation Status "T":**
+
+Minimum G3: 0
+
+First Quartile (Q1): 8
+
+Median: 11
+
+Third Quartile (Q3): 14
+
+Maximum G3: 19
+
+Outlier in Category "A": The "A" category has an outlier with a value of zero, indicating a student with an extremely low final grade compared to the rest of the students in this category.
+
+**Interpretation**
+Both categories, "A" and "T," have a similar median final grade of 11.
+
+The interquartile ranges (IQRs) for both categories are relatively narrow, indicating that the middle 50% of students in each category have similar grade distributions.
+
+The presence of an outlier with a value of zero in the "A" category suggests an exceptional case of a student who achieved an unusually low grade compared to their peers in the same category.
+
+In conclusion, the analysis of grade variances according to parent's cohabitation status
+
+Since there is a great difference between the distributions of categories in Pstatus as shown in task 2, I found it fit to do a weighted analysis in order to get a more fitting conclusion.
+
+The distributions in the categories are as follows:
+
+"A":This category represents students whose parents are living together. 51 .
+
+"T":This category represents students whose parents are apart. This could mean that the parents are separated, divorced, or living in different households for any other reason. 354 .
+
+```{r}
+# Load necessary libraries
+library(survey)
+
+# Create a weight variable based on the Pstatus category
+weights3 <- ifelse(student_mat$Pstatus == "A", 1, ifelse(student_mat$Pstatus == "T", 1, 1))
+
+# Create a survey design with weights
+survey_design3 <- svydesign(ids = ~1, weights = ~weights3, data = student_mat)
+
+# Calculate weighted means for G3 by Pstatus
+weighted_means3 <- svytotal(~G3, by = ~Pstatus, design = survey_design3)
+
+# Calculate standard errors for G3 by Pstatus
+weighted_se3 <- svyby(~G3, by = ~Pstatus, design = survey_design3, svytotal)
+
+# Print the results
+print(weighted_means3)
+print(weighted_se3)
+
+
+```
+For students whose parents cohabit ("A" in Pstatus), the weighted mean final grade (G3) is approximately 459, with a standard error of about 73.18.
+
+For students whose parents live apart ("T" in Pstatus), the weighted mean final grade (G3) is approximately 3654, with a standard error of about 106.92.
+
+These results give insight into the average final grades for students based on their parents' cohabitation status. The standard errors indicate the precision of these estimates. It appears that there might be a difference in final grades between students whose parents cohabit and those whose parents live apart, therefore, further analysis needs to be done to give better conclusions.
+
+creating a bar plot with error bars to visualize the grade variances by Parents' cohabitation status , taking into account the weights:
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+
+# Create a data frame for the plot
+data_plot3 <- data.frame(
+  Pstatus = c("A", "T"),
+  mean_grade3 = c(459, 3654),
+  se3 = c(73.17915, 106.91645)
+)
+
+# Plot the grade variances by Pstatus
+plot_pstatus_variances <- ggplot(data_plot3, aes(x = Pstatus, y = mean_grade3, fill = Pstatus)) +
+  geom_col(position = "dodge") +
+  geom_errorbar(aes(ymin = mean_grade3 - se3, ymax = mean_grade3 + se3),
+                width = 0.25, position = position_dodge(width = 0.9)) +
+  labs(title = "Grade Variances by Parent's Cohabitation Status",
+       x = "Parent's Cohabitation Status",
+       y = "Mean Final Grade (G3)",
+       fill = "Parent's Cohabitation Status") +
+  theme_minimal()
+
+print(plot_pstatus_variances)
+
+```
+The plot titled "Grade Variances by Parent's Cohabitation Status" displays the mean final grade (G3) variations for students based on whether their parents are cohabiting or not.
+
+The x-axis represents the categories of parent's cohabitation status, with "A" indicating parents are apart and "T" indicating parents are together.
+
+The bars represent the mean final grades for each category, and the height of each bar indicates the average grade obtained by students in that specific category.
+
+The error bars extending from each bar indicate the variability or standard error associated with the mean final grades. A longer error bar suggests higher variability in the mean grade for that category.
+
+Interpretation:
+
+Parent's Cohabitation Status Categories: The plot compares the mean final grades of students whose parents are apart ("A") and those whose parents are together ("T").
+
+Mean Final Grades: The plot shows that students whose parents are together ("T") have a significantly higher mean final grade compared to those whose parents are apart ("A"). This suggests that students with parents who are cohabiting tend to perform better academically on average.
+
+Variability: The error bars associated with each bar indicate the variability or spread of the mean final grades within each category. The error bars for both categories appear to have similar lengths, suggesting that the variability in mean final grades is relatively consistent for both parent's cohabitation statuses.
+
+In conclusion, the plot provides insight into the grade variances based on parent's cohabitation status. Students with cohabiting parents ("T") tend to have higher mean final grades compared to students with non-cohabiting parents ("A"), with relatively consistent variability in mean grades for both categories.
+
+While there is a difference in mean grades between the two categories, the variability or spread of mean final grades within each category appears to be relatively consistent. This suggests that the academic performance of students with cohabiting parents is generally higher, but the distribution of grades within each category is similar in terms of variability.
+
+# TASK 5: Conclusions and Recommendations 
+
+## - Summarize the results of your data analysis.
+
+The data set encompasses students from two schools, with the "GP" school having a larger representation. The gender distribution is fairly balanced between male and female students. Urban residences are prevalent among students, and often from families of more than three members, with parents living together. Primary school selection factors are often based on offered courses and school reputation.Maternal guardianship is significant among students. The majority aim for higher education, have home internet access, and report positive family relationships. After-school free time is generally moderate. Age, absences, and grade scores (G1, G2, G3) exhibit positively skewed distributions, highlighting most students' concentrated scores while accounting for outliers with higher or lower values. 
+
+Study Time and Final Grades Relationship: As study time increases from category 1 to 4, median final grades (G3) tend to rise, indicating a positive connection between study time and grades. However, outliers with high grades exist even in categories with low study time.
+
+Guardian Categories Impact: Students with mothers as guardians have the highest weighted mean final grades, followed by students with fathers and then other guardians. The variability in mean grades is highest for students with fathers as guardians.
+
+Sex-based Comparison: There's a small difference in mean final grades between female and male students, with overlapping error bars indicating no significant difference.
+
+Family Size Influence: Both family size categories (GT3 and LE3) exhibit grade variability. Students with larger family sizes (GT3) show slightly greater grade variability than those with smaller family sizes (LE3).
+
+Parent's Cohabitation and Grades: Students with cohabiting parents tend to have higher mean final grades compared to those with non-cohabiting parents. Variability in mean grades is consistent across both categories.
+
+In conclusion, study time correlates with improved grades, and students with mothers as guardians tend to perform the best. Gender, family size, and parent's cohabitation status also impact academic performance but with varying degrees of significance and variability. Overall, these insights contribute to a deeper understanding of factors influencing student achievement.
+
+
+## - Based on your findings, make any potential suggestions for enhancing student accomplishment
+
+**Promote Effective Study Habits:**
+Encourage all students to allocate more time for studying, as the data indicates a positive correlation between study time and final grades. Implement study skill workshops to help students develop effective study techniques, time management, and self-discipline.
+
+**Targeted Support for Family Size:**
+Recognize the variability in mean grades based on family size. Offer additional support to students from families with more members (GT3) by providing resources for managing their academic responsibilities alongside family commitments.
+
+**Parental Engagement Programs:**
+Given the significant impact of a cohabiting family environment on academic performance, develop programs to enhance parental engagement and communication for students with non-cohabiting parents. This support could contribute to improving their academic success.
+
+**Utilize G2 Performance for Prediction:**
+Leverage the strong positive correlation between G2 (Second period grade) and final grades (G3) to identify students who might need additional support early on. Intervene for those with lower G2 scores to help them improve their overall performance.
+
+**Targeted Assistance for "MS" School:**
+Consider providing additional academic support to students in the "MS" school, especially those with lower grades. Address any potential challenges they may be facing and offer resources to help them improve their performance.
+
+# END 
+
+
+
+
+
+
+
+
