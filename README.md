@@ -88,6 +88,7 @@ for (var in categorical_vars) {
 ```
 <img width="499" alt="Screenshot 2023-12-02 224822" src="https://github.com/IvyKemas/Comprehensive-analysis-on-Portuguese-Schools-/assets/122665283/8d0410d0-2607-4914-8f48-34d9da0a5bb6">
 <img width="502" alt="Screenshot 2023-12-02 224938" src="https://github.com/IvyKemas/Comprehensive-analysis-on-Portuguese-Schools-/assets/122665283/c79d40cd-2d7c-49a4-86c9-f70172a98d8c">
+
 The above are some of the visualizations generated for the categorical variables.
 
 ## Discrete Numerical Variables:
@@ -118,6 +119,7 @@ for (var in discrete_numeric_vars) {
 ```
 <img width="499" alt="Screenshot 2023-12-02 225538" src="https://github.com/IvyKemas/Comprehensive-analysis-on-Portuguese-Schools-/assets/122665283/fbbcd865-5112-4ef5-86da-354165c52a99">
 <img width="494" alt="Screenshot 2023-12-02 225737" src="https://github.com/IvyKemas/Comprehensive-analysis-on-Portuguese-Schools-/assets/122665283/1f9cb51c-f709-4cef-8bdc-416bc8bee79e">
+
 Above is a glimpse of some of the visualizations generated from the Discrete Numerical Variables.
 
 ## Continuous Numerical Variables:
@@ -145,6 +147,7 @@ for (var in continuous_numeric_vars) {
 ```
 <img width="506" alt="Screenshot 2023-12-02 230125" src="https://github.com/IvyKemas/Comprehensive-analysis-on-Portuguese-Schools-/assets/122665283/b2495f22-33ea-4efb-9660-b37e5f3717a6">
 <img width="493" alt="Screenshot 2023-12-02 230203" src="https://github.com/IvyKemas/Comprehensive-analysis-on-Portuguese-Schools-/assets/122665283/d9b2a44c-a063-473e-9290-8d80319a6274">
+
 Above are some of the visualiations generated.
 
 ## Correlation-Analysis
